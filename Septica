@@ -31,23 +31,35 @@ void f(unsigned char jan, unsigned char jac, unsigned char jbn, unsigned char jb
             first_card=jan;
             if(cur_pl==1) g2+=prev_pts;
             else g1+=prev_pts;
-                        ok=0;
-            if(jbn==jan || jbn==7)
+            ok=0;
+            prev_pts=0;
+            if(jbn==jan||jbn==7)
             {
                 if(cur_pl==1) cur_pl=0;
                 else cur_pl=1;
                 ok=1;
+                prev_pts=pts;
             }
-            prev_pts=pts;
+            else{
+                if(cur_pl==1) g2+=pts;
+                else g1+=pts;
+            }
         }
         else{
             prev_pts+=pts;
-            if(jbn!=first_card && jbn!=7)
-                {
-                    ok=0;
-                    if(cur_pl==1) cur_pl=0;
-                    else cur_pl=1;
-                }
+            if(g3==16){
+                if(jbn==first_card || jbn==7)
+                    if(cur_pl==1) g2+=prev_pts;
+                    else g1+=prev_pts;
+            }
+            else{
+                if(jbn!=first_card && jbn!=7)
+                    {
+                        ok=0;
+                        if(cur_pl==1) cur_pl=0;
+                        else cur_pl=1;
+                    }
+            }
         }
         if(g3!=16)
         {
@@ -64,10 +76,6 @@ void f(unsigned char jan, unsigned char jac, unsigned char jbn, unsigned char jb
             }
         }
         else{
-            if(r){
-                    if(cur_pl==1) g2+=prev_pts;
-                    else g1+=prev_pts;
-            }
             cout<<"Final joc:"<<g1<<'-'<<g2<<'\n';
             for(i=0;i<15;++i)
                 for(j=0;j<4;++j)

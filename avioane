@@ -1,10 +1,5 @@
 static int v[10][10],i,j,x,y,r,o,A,B,C,D,E,F,G,H;
     for(i=0;i<n;++i){
-        x=p[i][0];
-        y=p[i][1];
-        r=p[i][2];
-        o=0;
-        A=x-1,B=x-2,C=x+1,D=x+2,E=y-1,F=y-2,G=y+1,H=y+2;
         if(!r){
             if(F>=0 && H<10 && x+4<10 && !v[x][y]){
                 for(j=E;j<=G;++j)

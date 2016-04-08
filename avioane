@@ -1,0 +1,71 @@
+static int v[10][10],i,j,x,y,r,o,A,B,C,D,E,F,G,H;
+    for(i=0;i<n;++i){
+        x=p[i][0];
+        y=p[i][1];
+        r=p[i][2];
+        o=0;
+        A=x-1,B=x-2,C=x+1,D=x+2,E=y-1,F=y-2,G=y+1,H=y+2;
+        if(!r){
+            if(F>=0 && H<10 && x+4<10 && !v[x][y]){
+                for(j=E;j<=G;++j)
+                    if(v[C][j]||v[x+4][j])
+                        o=1;
+                if(v[D][y]||v[x+3][y]||v[C][F]||v[C][H])
+                    o=1;
+                if(!o){
+                    for(j=E;j<=G;++j)
+                        v[C][j]=v[x+4][j]=1;
+                    v[D][y]=v[x+3][y]=v[C][F]=v[C][H]=v[x][y]=1;
+                }
+            }
+        }
+        else if(r==1){
+            if(B>=0&&D<10&&y-4>=0&&!v[x][y]){
+                for(j=A;j<=C;++j)
+                    if(v[j][E]||v[j][y-4])
+                        o=1;
+                if(v[x][F]||v[x][y-3]||v[B][E]||v[D][E])
+                    o=1;
+                if(!o){
+                    for(j=A;j<=C;++j)
+                        v[j][E]=v[j][y-4]=1;
+                    v[x][F]=v[x][y-3]=v[B][E]=v[D][E]=v[x][y]=1;
+                }
+            }
+        }
+        else if(r==2){
+            if(F>=0 && H<10 && x-4>=0 && !v[x][y]){
+                for(j=E;j<=G;++j)
+                    if(v[A][j]||v[x-4][j])
+                        o=1;
+                if(v[B][y]||v[x-3][y]||v[A][F]||v[A][H])
+                    o=1;
+                if(!o){
+                    for(j=E;j<=G;++j)
+                        v[A][j]=v[x-4][j]=1;
+                    v[B][y]=v[x-3][y]=v[A][F]=v[A][H]=v[x][y]=1;
+                }
+            }
+        }
+        else{
+            if(B>=0&&D<10&&y+4<10&&!v[x][y]){
+                for(j=A;j<=C;++j)
+                    if(v[j][G]||v[j][y+4])
+                        o=1;
+                if(v[x][H]||v[x][y+3]||v[B][G]||v[D][G])
+                    o=1;
+                if(!o){
+                    for(j=A;j<=C;++j)
+                        v[j][G]=v[j][y+4]=1;
+                    v[x][H]=v[x][y+3]=v[B][G]=v[D][G]=v[x][y]=1;
+                }
+            }
+        }
+    }
+    for(i=0;i<10;++i)
+    {
+        for(j=0;j<10;++j)
+            if(v[i][j])cout<<"[]";
+            else cout<<"..";
+        cout<<'\n';
+    }
